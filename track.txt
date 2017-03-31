@@ -1,0 +1,105 @@
+08.03 13:15-21:00
+AdaBoost
+RoC/AuC curve
+AUC Boosting - ask?
+CVFDT algorithm
+tau/tie treshold
+fix my implementation (R, tau)
+compare MOA with my implementation (Churn_8_attributes.arff)
+
+09.03 13:30-19:45
+read about active leaves/nodes/tree depth in MOA book
+understand depth/leaves/nodes and implement
+
+10.03 13:50
+read article and presentation
+
+
+think about reimplementation of Htree general
+
+
+start implementation of CVFDT
+
+
+tried reference/MOA implementation and compared with mine
+
+13.03 15:30-20:00
+Try reference implementation
+ - Python 3.5
+ - pip3 install sortedcontainers
+
+14.03 12:00-19:00
+make it working
+revise the method of counting examples seen and check it in my code
+
+15.03 12:30-18:20
+find differences between my code/reference and MOA
+
+16.03 13:00-20:30
+how to perform split? draw some examples
+who is right? try to do it
+
+17.03 12:15-18:30
+make my code working and compare it with MOA
+should store all possible combinations? probably not
+Look into reference code (how to reimplement HTree general?)
+
+20.03 13:00
+should store all possible combinations? impossible
+copystat version (v35_copystat)
+Gini split criterion
+
+21.03 12:30-16:30
+http://dimitri-christodoulou.blogspot.nl/2012/03/use-weka-in-your-python-code.html
+http://moa.cms.waikato.ac.nz/details/classification/using-weka/
+https://github.com/fracpete/python-weka-wrapper
+try weka library directly in python:
+	- download & unzip JPype1-0.6.2.tar
+	- cmd: python setup.py install 
+
+22.03 13:00-19:00
+Learn how to use MOA in Java
+https://weka.wikispaces.com/Use+WEKA+in+your+Java+code
+http://moa.cms.waikato.ac.nz/using-moas-api-with-scala/
+http://www.cs.waikato.ac.nz/~abifet/MOA/API/classmoa_1_1classifiers_1_1trees_1_1_hoeffding_tree.html
+try to get information from learner in Java code
+
+23.03 14:00-20:00
+http://moa.cms.waikato.ac.nz/prequential-cross-validation-evaluation/
+try Tutorial 2 in Java in order to set some parameters
+try to output some information
+search for Tutorial of how to use Tutorial
+https://github.com/arinto/moa-tut2-exercise2
+
+24.03 meeting with supervisers
+
+27.03 15:00-20:15
+compare my implementation and MOA in Java
+
+28.03 13:45-21:30
+moa.classifiers.core.attributeclassobservers
+made my "own" split criterion
+found difference b/w my implementation and MOA and fixed it:
+ - how to count Gain: Entropy(real number of examples) - Entropy(examples seen after last split)
+ - do not take into account leaves with zero statistics
+printing of the tree
+
+29.03 15:00-18:00
+make github repository
+
+30.30 14:00-17:00
+start CVFDT implementation
+
+31.03 14:00-18:30
+continue implementation
+
+next:
+
+consider normal VFDT with forget example mechanism
+read original paper, book and MOA book again 
+
+continue implementation
+generate sample with changing distribution
+
+how to select delta/tau correctly(automaticaly)?
+https://www.youtube.com/watch?v=b1Ksv50CUx0&t=1403s

@@ -1,7 +1,7 @@
 08.03 13:15-21:00
 AdaBoost
 RoC/AuC curve
-AUC Boosting - ask?
+AUC Boosting
 CVFDT algorithm
 tau/tie treshold
 fix my implementation (R, tau)
@@ -93,13 +93,51 @@ start CVFDT implementation
 31.03 14:00-18:30
 continue implementation
 
-next:
-
+03.04 13:00-18:00
 consider normal VFDT with forget example mechanism
-read original paper, book and MOA book again 
+review original paper
 
-continue implementation
-generate sample with changing distribution
+04.04 13:00-16:30
+review book and MOA book again 
+
+05.04 15:00-17:30
+check Mining Decision Trees from Data Streams presentation
+Hoeffding Adaptive Tree (which implemented in MOA) is improved Hoeffding Window Tree
+differences  of Hoeffding Adaptive Trees with CVFDT
+
+06.04 13:30-18:30
+search for Hoeffding Adaptive Trees papers
+review what I found
+review Hoeffding Window Tree (MOA book, p.134-135)
+look into MOA's Hoeffding Adaptive Trees Java code
+
+07.04 13:00-18:00
+read about ADWIN0 in MOA book (p.119)
+decide what to implement
+summarise everything in one algorithm which will be implemented next (p.135)
+
+10.04 14:15-20:45
+poker dataset test on htree_general.py
+fixed R=round(log2(N_classes))
+bug with counting leaves and nodes is detected (no adjustment of number of values attributes have)
+
+next:
+test poker dataset on HoeffdingAdaptiveTree in MOA
+try to detect changes in MOA (analise depth of the tree or draw tree in Java?)
+
+generate sample with concept drift (changing distribution) and test it
+start implementation of HoeffdingAdaptiveTree in my setting
+
+check:
+W. Nick Street and YongSeog Kim. A streaming ensemble algorithm
+(SEA) for large-scale classification. In International Conference on Knowledge
+Discovery and Data Mining, pages 377ñ382, 2001.
+
+Frequent tree mining [B-G, KDDí08, ECMLPKDDí09]
+Decision trees [Bifet-G, IDAí09]
+Adaptive Learning from Evolving Data Streams. Albert Bifet, Ricard Gavald√ IDA 2009
+
+think about my own algorithm
 
 how to select delta/tau correctly(automaticaly)?
 https://www.youtube.com/watch?v=b1Ksv50CUx0&t=1403s

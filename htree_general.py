@@ -31,13 +31,13 @@ class Hleaf():
         return len(self.stat)
 
     def checkHBound(self,G1,G2,text_file):
-        R = np.log2(len(self.stat)) # range of bound
+        R = np.round(np.log2(len(self.stat))) # range of bound
         epsilon = np.sqrt((R*R*np.log(1/np.float(DELTA)))/np.float(2*self.nl))
         #print 'Example',self.nl,'G1 =',G1,'G2 =',G2,'bound =',epsilon
         dG = np.abs(G1 - G2)
         if (dG > epsilon) or (epsilon < TAU):
-            print 'HBound is satisfied, number of examples',self.n,np.sum(self.stat),self.nl,G1,G2,epsilon,(dG > epsilon),(epsilon < TAU)
-            text_file.write('HBound is satisfied, number of examples'+str(self.nl)+'\n')
+            ##print 'HBound is satisfied, number of examples',self.n,np.sum(self.stat),self.nl,G1,G2,epsilon,(dG > epsilon),(epsilon < TAU)
+            ##text_file.write('HBound is satisfied, number of examples'+str(self.nl)+'\n')
             return True
         else:
             return False
@@ -47,6 +47,7 @@ class Hleaf():
 
     def countNumberOfLeaves(self):
         if self.split == None:
+            ##return 1
             if np.sum(self.stat) != 0:
                 return 1
             else:
@@ -56,6 +57,7 @@ class Hleaf():
         
     def countNumberOfNodes(self):
         if self.split == None:
+            ##return 1
             if np.sum(self.stat) != 0:
                 return 1
             else:
@@ -65,6 +67,7 @@ class Hleaf():
             
     def printTree(self,string):
         if self.split == None:
+            ##print string,'Leaf',self.stat,np.sum(self.stat),self.n,self.nl
             if np.sum(self.stat) != 0:
                 print string,'Leaf',self.stat
         else:
@@ -81,7 +84,7 @@ class Hleaf():
         classId = example[-1]
         if self.split == None:
             classIdPredicted = self.predictClass() # predict class by majority selection
-            text_file.write(str(self.nl)+'\n')            
+            ##text_file.write(str(self.nl)+'\n')            
             self.nl += 1
             self.n += 1
             self.stat[classId] += 1
@@ -107,10 +110,10 @@ class Hleaf():
                         if self.checkHBound(bestGain1,bestGain2,text_file):
                             #if np.abs(bestGain1) > np.abs(bestGain2):
                             if bestGain1 > bestGain2:
-                                print 'Split suggestion',bestGain1
+                                ##print 'Split suggestion',bestGain1
                                 self.splitLeaf(self.candidates[gainList.index(bestGain1)])
                             else:
-                                print 'Split suggestion',bestGain2
+                                ##print 'Split suggestion',bestGain2
                                 self.splitLeaf(self.candidates[gainList.index(bestGain2)])
         else:
             classIdPredicted = self.split.sortExampleAndPredict(example,text_file) # sort example into following attribute
@@ -128,7 +131,7 @@ class Hleaf():
         numValues = attribToSplit.getNumberValues()
         numClasses = len(self.stat)
         self.candidates.remove(attribToSplit)
-        print 'Split leaf by attribute',attributeId,'next candidates',[i.getAttributeId() for i in self.candidates]
+        ##print 'Split leaf by attribute',attributeId,'next candidates',[i.getAttributeId() for i in self.candidates]
         self.split = HNode(attributeId,numValues,numClasses,self.candidates[:])
         candStat = attribToSplit.getStat()
         self.split.setStat(candStat)
@@ -318,11 +321,11 @@ def HBound(R,d,n):
     return np.sqrt((R*R*np.log(1/np.float(d)))/np.float(2*n))
 #%%
 # Initial values:
-c = 2 # number of classes
-#c = 10 # number of classes
-givenAttrib = [5,2,2,2,2,5,5,5] # dimensionality w.r.t. every attribute
+##c = 2 # number of classes
+c = 10 # number of classes
+#givenAttrib = [5,2,2,2,2,5,5,5] # dimensionality w.r.t. every attribute
 ##givenAttrib = [2,2] # dimensionality w.r.t. every attribute
-#givenAttrib = [5,13,5,14,5,14,5,14,5,14] # dimensionality w.r.t. every attribute
+givenAttrib = [4,12,4,13,4,13,4,13,4,12] # dimensionality w.r.t. every attribute
 
 # Initialization of parameters:
 candAttrib = []
@@ -336,7 +339,8 @@ with open("results.txt", "w") as text_file:
     #f = open('/storage/sdcard0/org.qpython.qpy/scripts/poker.csv', 'r')
     #f = open('/storage/sdcard0/org.qpython.qpy/scripts/test.txt', 'r')
     ##f = open('stream.txt', 'r')
-    f = open('test.txt', 'r')
+    ##f = open('test.txt', 'r')
+    f = open('poker2.csv', 'r')
     for line in f:
         if count < 1000000:
             try:
@@ -348,7 +352,7 @@ with open("results.txt", "w") as text_file:
                     classPredicted = HT.sortExampleAndPredict(example,text_file)
                     if example[-1] == classPredicted:
                         countCorrect += 1
-                    if np.mod(count,500)==0:
+                    if np.mod(count,100000)==0:
                         print 'Iteration',count,'nodes',HT.countNumberOfNodes(),'leaves',HT.countNumberOfLeaves(),'depth',HT.countDepth()
                 except ValueError:
                     print "Invalid example:", example, count
